@@ -2,14 +2,11 @@ version: '3'
 
 services:
   postgresql:
-    image: postgres:11
-    container_name: pg-docker
-    ports:
-      - "5432:5432"
+    image: postgres:11.2-alpine
+    restart: always
     env_file:
       - .env
     volumes:
-      - ./postgres.conf:/etc/postgresql/postgresql.conf
       - ./data:/var/lib/postgresql/data
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
-    restart: unless-stopped
+    ports:
+      - 5432:5432
